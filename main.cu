@@ -5,7 +5,7 @@
 //this means that the headers are created here, once, and in any other file just
 //use #include "stb_image.h"
 //in other words the functions of that library are part of this programs binary now.
-//can also pass the definitions on the command for nvcc compiling.
+//can also pass the definitions on the command for nvcc compiling. hello
 #define STB_IMAGE_IMPLEMENTATION
 #include "third_party/stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION

@@ -7,9 +7,9 @@
 //in other words the functions of that library are part of this programs binary now.
 //can also pass the definitions on the command for nvcc compiling.
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "third_party/stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
+#include "third_party/stb_image_write.h"
 
 __global__ void brighten(unsigned char* img, int w, int h, int ch, int value){
     int x = blockIdx.x * blockDim.x + threadIdx.x;

@@ -5,11 +5,11 @@
 //this means that the headers are created here, once, and in any other file just
 //use #include "stb_image.h"
 //in other words the functions of that library are part of this programs binary now.
-//can also pass the definitions on the command for nvcc compiling. hello
+//can also pass the definitions on the command for nvcc compiling.
 #define STB_IMAGE_IMPLEMENTATION
-#include "third_party/stb_image.h"
+#include "../third_party/stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "third_party/stb_image_write.h"
+#include "../third_party/stb_image_write.h"
 
 __global__ void brighten(unsigned char* img, int w, int h, int ch, int value){
     int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -26,7 +26,7 @@ __global__ void brighten(unsigned char* img, int w, int h, int ch, int value){
 
 int main(){
     int w, h, ch;
-    unsigned char* h_img = stbi_load("input.png", &w, &h, &ch, 0); //host image. pass in dereferenced integers (pointers) so the function can modify them in place.
+    unsigned char* h_img = stbi_load("../images/minion.png", &w, &h, &ch, 0); //host image. pass in dereferenced integers (pointers) so the function can modify them in place.
     if (!h_img){
         printf("stbi load failed");
         return 1;
@@ -53,7 +53,7 @@ int main(){
     cudaMemcpy(h_img, d_img, bytes, cudaMemcpyDeviceToHost);
     cudaFree(d_img);
 
-    stbi_write_png("output.png", w, h, ch, h_img, w*ch);
+    stbi_write_png("../images/output.png", w, h, ch, h_img, w * ch); // last element here is w * ch which is the bytes per row. important for how png is written.
     stbi_image_free(h_img);
 
     printf("saved output.png!\n");
